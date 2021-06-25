@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+      integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container fluid">
+      <input id="word" value="Berserk" />
+      <button id="btn">Generate</button>
+
+      <hr />
+      <div
+        id="result"
+        class="
+          d-none
+          m-1
+          text-nowrap
+          border-success
+          border-info
+          border
+          border-width-5
+          border-bottom-0
+          border-top-0
+          border-right-0
+        "
+      >
+        <hr />
+        <div id="content" class="d-inline-flex"></div>
+        <hr />
+      </div>
+      <div id="results" class="element-container"></div>
+    </div>
+    <div id="model" class="d-none d-inline-flex m-2">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <rect />
+          <text id="name" />
+          <text id="weight" />
+          <text id="number" />
+        </g>
+      </svg>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+      integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+      crossorigin="anonymous"
+    ></script>
+    <script src="elements.js"></script>
+    <script src="script.js"></script>
+    <script>
+      //    printElement(4, "Fe", 55.8452, 26, "black", "grey");
+      //    printElement(4, "Vt", 55.8452, 26, "pink", "grey");
+
+      $("#btn").on("click", function () {
+        $("#results").empty();
+
+        var result = algorithm($("#word").val().toLowerCase());
+        result.forEach((element) => {
+          var onlyReal = checkResult(element);
+
+          printResult(element, onlyReal);
+        });
+      });
+    </script>
+  </body>
+</html>

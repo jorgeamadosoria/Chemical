@@ -1,0 +1,155 @@
+package com.company;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Main {
+private static String[] elements = {"Ac"
+        ,"Ag"
+        ,"Al"
+        ,"Am"
+        ,"Ar"
+        ,"As"
+        ,"At"
+        ,"Au"
+        ,"B"
+        ,"Ba"
+        ,"Be"
+        ,"Bh"
+        ,"Bi"
+        ,"Bk"
+        ,"Br"
+        ,"C"
+        ,"Ca"
+        ,"Cd"
+        ,"Ce"
+        ,"Cf"
+        ,"Cl"
+        ,"Cm"
+        ,"Cn"
+        ,"Co"
+        ,"Cr"
+        ,"Cs"
+        ,"Cu"
+        ,"Db"
+        ,"Ds"
+        ,"Dy"
+        ,"Er"
+        ,"Es"
+        ,"Eu"
+        ,"F"
+        ,"Fe"
+        ,"Fl"
+        ,"Fm"
+        ,"Fr"
+        ,"Ga"
+        ,"Ge"
+        ,"H"
+        ,"He"
+        ,"Hf"
+        ,"Hg"
+        ,"Ho"
+        ,"Hs"
+        ,"I"
+        ,"In"
+        ,"Ir"
+        ,"K"
+        ,"Kr"
+        ,"La"
+        ,"Li"
+        ,"Lr"
+        ,"Lu"
+        ,"Lv"
+        ,"Mc"
+        ,"Md"
+        ,"Mg"
+        ,"Mn"
+        ,"Mo"
+        ,"Mt"
+        ,"N"
+        ,"Na"
+        ,"Nb"
+        ,"Nd"
+        ,"Ne"
+        ,"Nh"
+        ,"Ni"
+        ,"No"
+        ,"Np"
+        ,"O"
+        ,"Og"
+        ,"Os"
+        ,"P"
+        ,"Pa"
+        ,"Pb"
+        ,"Pd"
+        ,"Pm"
+        ,"Po"
+        ,"Pr"
+        ,"Pt"
+        ,"Pu"
+        ,"Ra"
+        ,"Rb"
+        ,"Re"
+        ,"Rf"
+        ,"Rg"
+        ,"Rh"
+        ,"Rn"
+        ,"Ru"
+        ,"S"
+        ,"Sb"
+        ,"Sc"
+        ,"Se"
+        ,"Sg"
+        ,"Si"
+        ,"Sm"
+        ,"Sn"
+        ,"Sr"
+        ,"Ta"
+        ,"Tb"
+        ,"Tc"
+        ,"Te"
+        ,"Th"
+        ,"Ti"
+        ,"Tl"
+        ,"Tm"
+        ,"Ts"
+        ,"U"
+        ,"V"
+        ,"W"
+        ,"Xe"
+        ,"Y"
+        ,"Yb"
+        ,"Zn"
+        ,"Zr"};
+    static void  combos(String input,List<String> result,List<List<String>> results){
+        if (input.isEmpty())
+        {
+            results.add(result.stream().map(e -> e + " ").collect(Collectors.toList()));
+        }
+
+    for (int i = 0;i < elements.length;i++){
+        if (input.startsWith(elements[i].toLowerCase())){
+            result.add(elements[i]);
+            combos(input.substring(elements[i].length()),result,results);
+            result.remove(elements[i]);
+        }
+    }
+
+}
+
+
+    public static void main(String[] args) {
+
+        String input = "Berserk";
+        elements = Arrays.stream(elements).collect(Collectors.toUnmodifiableList()).toArray(new String[0]);
+        Arrays.sort(elements);
+
+        var results = new ArrayList<List<String>>();
+        combos(input.toLowerCase(), new ArrayList<String>(),results);
+
+        results.stream().forEach(r -> {r.stream().forEach(System.out::print); System.out.println();});
+    }
+}
