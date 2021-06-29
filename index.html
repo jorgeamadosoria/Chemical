@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Chemical Words</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -25,43 +25,490 @@
     />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <div class="container fluid">
-      <input id="word" value="Berserk" />
-      <button id="btn">Generate</button>
-
-      <hr />
-      <div
-        id="result"
-        class="
-          d-none
-          m-1
-          text-nowrap
-          border-success
-          border-info
-          border
-          border-width-5
-          border-bottom-0
-          border-top-0
-          border-right-0
-        "
+  <body class="container-fluid">
+    <nav class="navbar w-100 navbar-expand-md navbar-light fixed-top bg-light">
+      <a class="navbar-brand" href="#">Chemical Words</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <hr />
-        <div id="content" class="d-inline-flex"></div>
-        <hr />
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="w-100"></div>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mb-1" id="pages-tab" role="tablist">
+          <li class="nav-item">
+            <a
+              class="nav-link active text-dark"
+              id="pages-home-tab"
+              data-toggle="pill"
+              href="#pages-home"
+              role="tab"
+              aria-controls="pages-home"
+              aria-selected="false"
+              ><i class="fa-2x fas fa-home"></i
+            ></a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark"
+              id="pages-profile-tab"
+              href="https://github.com/jorgeamadosoria/Chemical"
+              role="tab"
+              aria-controls="pages-profile"
+              aria-selected="false"
+              ><i class="fa-2x fab fa-github"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark"
+              id="pages-table-tab"
+              data-toggle="pill"
+              href="#pages-table"
+              role="tab"
+              aria-controls="pages-table"
+              aria-selected="true"
+              ><i class="fa-2x fas fa-table"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark"
+              id="pages-about-tab"
+              data-toggle="pill"
+              href="#pages-about"
+              role="tab"
+              aria-controls="pages-about"
+              aria-selected="false"
+              ><i class="fa-2x fas fa-info-circle"></i
+            ></a>
+          </li>
+        </ul>
       </div>
-      <div id="results" class="element-container"></div>
+    </nav>
+    <br />
+    <div class="tab-content" id="pages-tabContent">
+      <div
+        class="tab-pane fade container fluid show active"
+        id="pages-home"
+        role="tabpanel"
+        aria-labelledby="pages-home-tab"
+      >
+        <br /><br />
+        <hr />
+        <form class="form-inline">
+          <div class="ml-2 mb-2 form-group">
+            <input
+              id="word"
+              maxlength="15"
+              type="text"
+              class="form-control"
+              placeholder="word to generate symbols"
+            />
+          </div>
+          <div class="ml-2 mb-2 form-group border pl-2 pt-2 pb-1">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="colorRadio"
+                id="ptable"
+                value="ptable"
+                checked
+              />
+              <label class="form-check-label" for="ptableColor">Ptable</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="colorRadio"
+                id="jmol"
+                value="jmol"
+              />
+              <label class="form-check-label" for="JMolColor">JMol</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="colorRadio"
+                id="greyscale"
+                value="grey"
+              />
+              <label class="form-check-label" for="greyScaleColor"
+                >Greyscale</label
+              >
+            </div>
+          </div>
+          <div class="ml-2 mb-2 form-group">
+            <button id="btn" type="button" class="btn btn-primary">
+              <span
+                id="btn-loader"
+                class="d-none spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              <span class="btn-text">Generate</span>
+            </button>
+          </div>
+          <div id="options" class="d-none">
+            <div class="ml-2 mb-2 form-group d-inline-flex">
+              <button
+                class="btn btn-success"
+                type="button"
+                data-toggle="collapse"
+                data-target="#realResultsCollapse"
+                aria-expanded="false"
+                aria-controls="realResultsCollapse"
+              >
+                <span id="btn-real" class="badge badge-light"></span>
+                Toggle Real Results
+              </button>
+            </div>
+            <div class="ml-2 mb-2 form-group d-inline-flex">
+              <button
+                class="btn btn-info"
+                type="button"
+                data-toggle="collapse"
+                data-target="#notRealResultsCollapse"
+                aria-expanded="false"
+                aria-controls="notRealResultsCollapse"
+              >
+                <span id="btn-fake" class="badge badge-light"></span>
+                Toggle Fake Results
+              </button>
+            </div>
+          </div>
+        </form>
+        <hr />
+
+        <div class="collapse multi-collapse pt-1 pb-1" id="realResultsCollapse">
+          <div
+            id="resultsReal"
+            class="element-container card border-0 card-body"
+          ></div>
+        </div>
+        <div
+          class="collapse multi-collapse pt-1 pb-1"
+          id="notRealResultsCollapse"
+        >
+          <div
+            id="resultsNotReal"
+            class="element-container card border-0 card-body"
+          ></div>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pages-table"
+        role="tabpanel"
+        aria-labelledby="pages-table-tab"
+      >
+        <br /><br /><br />
+        <h4 class="text-center ml-3 mb-3">
+          <a
+            class="text-dark"
+            href="https://en.wikipedia.org/wiki/Periodic_table"
+            >Periodic Table <i class="fas fa-external-link-alt"></i
+          ></a>
+        </h4>
+        <table id="periodic" class="table table-borderless mr-3">
+          <thead>
+            <tr>
+              <th class="text-center p-0 pb-2"></th>
+              <th class="text-center p-0 pb-2">1</th>
+              <th class="text-center p-0 pb-2">2</th>
+              <th class="text-center p-0 pb-2">3</th>
+              <th class="text-center p-0 pb-2">4</th>
+              <th class="text-center p-0 pb-2">5</th>
+              <th class="text-center p-0 pb-2">6</th>
+              <th class="text-center p-0 pb-2">7</th>
+              <th class="text-center p-0 pb-2">8</th>
+              <th class="text-center p-0 pb-2">9</th>
+              <th class="text-center p-0 pb-2">10</th>
+              <th class="text-center p-0 pb-2">11</th>
+              <th class="text-center p-0 pb-2">12</th>
+              <th class="text-center p-0 pb-2">13</th>
+              <th class="text-center p-0 pb-2">14</th>
+              <th class="text-center p-0 pb-2">15</th>
+              <th class="text-center p-0 pb-2">16</th>
+              <th class="text-center p-0 pb-2">17</th>
+              <th class="text-center p-0 pb-2">18</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="p-0 text-center pl-1 align-middle">1</th>
+              <td class="p-0 text-center" id="1"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center" id="2"></td>
+            </tr>
+            <tr>
+              <th class="p-0 text-center pl-1 align-middle">2</th>
+              <td class="p-0 text-center" id="3"></td>
+              <td class="p-0 text-center" id="4"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center" id="5"></td>
+              <td class="p-0 text-center" id="6"></td>
+              <td class="p-0 text-center" id="7"></td>
+              <td class="p-0 text-center" id="8"></td>
+              <td class="p-0 text-center" id="9"></td>
+              <td class="p-0 text-center" id="10"></td>
+            </tr>
+            <tr>
+              <th class="p-0 text-center pl-1 align-middle">3</th>
+              <td class="p-0 text-center" id="11"></td>
+              <td class="p-0 text-center" id="12"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center" id="13"></td>
+              <td class="p-0 text-center" id="14"></td>
+              <td class="p-0 text-center" id="15"></td>
+              <td class="p-0 text-center" id="16"></td>
+              <td class="p-0 text-center" id="17"></td>
+              <td class="p-0 text-center" id="18"></td>
+            </tr>
+            <tr>
+              <th class="p-0 text-center pl-1 align-middle">4</th>
+              <td class="p-0 text-center" id="19"></td>
+              <td class="p-0 text-center" id="20"></td>
+              <td class="p-0 text-center" id="21"></td>
+              <td class="p-0 text-center" id="22"></td>
+              <td class="p-0 text-center" id="23"></td>
+              <td class="p-0 text-center" id="24"></td>
+              <td class="p-0 text-center" id="25"></td>
+              <td class="p-0 text-center" id="26"></td>
+              <td class="p-0 text-center" id="27"></td>
+              <td class="p-0 text-center" id="28"></td>
+              <td class="p-0 text-center" id="29"></td>
+              <td class="p-0 text-center" id="30"></td>
+              <td class="p-0 text-center" id="31"></td>
+              <td class="p-0 text-center" id="32"></td>
+              <td class="p-0 text-center" id="33"></td>
+              <td class="p-0 text-center" id="34"></td>
+              <td class="p-0 text-center" id="35"></td>
+              <td class="p-0 text-center" id="36"></td>
+            </tr>
+            <tr>
+              <th class="p-0 text-center pl-1 align-middle">5</th>
+              <td class="p-0 text-center" id="37"></td>
+              <td class="p-0 text-center" id="38"></td>
+              <td class="p-0 text-center" id="39"></td>
+              <td class="p-0 text-center" id="40"></td>
+              <td class="p-0 text-center" id="41"></td>
+              <td class="p-0 text-center" id="42"></td>
+              <td class="p-0 text-center" id="43"></td>
+              <td class="p-0 text-center" id="44"></td>
+              <td class="p-0 text-center" id="45"></td>
+              <td class="p-0 text-center" id="46"></td>
+              <td class="p-0 text-center" id="47"></td>
+              <td class="p-0 text-center" id="48"></td>
+              <td class="p-0 text-center" id="49"></td>
+              <td class="p-0 text-center" id="50"></td>
+              <td class="p-0 text-center" id="51"></td>
+              <td class="p-0 text-center" id="52"></td>
+              <td class="p-0 text-center" id="53"></td>
+              <td class="p-0 text-center" id="54"></td>
+            </tr>
+            <tr>
+              <th class="p-0 text-center pl-1 align-middle">6</th>
+              <td class="p-0 text-center" id="55"></td>
+              <td class="p-0 text-center" id="56"></td>
+              <td class="p-0 text-center" id="57"></td>
+              <td class="p-0 text-center" id="72"></td>
+              <td class="p-0 text-center" id="73"></td>
+              <td class="p-0 text-center" id="74"></td>
+              <td class="p-0 text-center" id="75"></td>
+              <td class="p-0 text-center" id="76"></td>
+              <td class="p-0 text-center" id="77"></td>
+              <td class="p-0 text-center" id="78"></td>
+              <td class="p-0 text-center" id="79"></td>
+              <td class="p-0 text-center" id="80"></td>
+              <td class="p-0 text-center" id="81"></td>
+              <td class="p-0 text-center" id="82"></td>
+              <td class="p-0 text-center" id="83"></td>
+              <td class="p-0 text-center" id="84"></td>
+              <td class="p-0 text-center" id="85"></td>
+              <td class="p-0 text-center" id="86"></td>
+            </tr>
+            <tr>
+              <th class="p-0 text-center pl-1 align-middle">7</th>
+              <td class="p-0 text-center" id="87"></td>
+              <td class="p-0 text-center" id="88"></td>
+              <td class="p-0 text-center" id="89"></td>
+              <td class="p-0 text-center" id="104"></td>
+              <td class="p-0 text-center" id="105"></td>
+              <td class="p-0 text-center" id="106"></td>
+              <td class="p-0 text-center" id="107"></td>
+              <td class="p-0 text-center" id="108"></td>
+              <td class="p-0 text-center" id="109"></td>
+              <td class="p-0 text-center" id="110"></td>
+              <td class="p-0 text-center" id="111"></td>
+              <td class="p-0 text-center" id="112"></td>
+              <td class="p-0 text-center" id="113"></td>
+              <td class="p-0 text-center" id="114"></td>
+              <td class="p-0 text-center" id="115"></td>
+              <td class="p-0 text-center" id="116"></td>
+              <td class="p-0 text-center" id="117"></td>
+              <td class="p-0 text-center" id="118"></td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="p-0"></th>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <th class="p-0 text-center pl-1 align-middle">La</th>
+              <td class="p-0 text-center" id="58"></td>
+              <td class="p-0 text-center" id="59"></td>
+              <td class="p-0 text-center" id="60"></td>
+              <td class="p-0 text-center" id="61"></td>
+              <td class="p-0 text-center" id="62"></td>
+              <td class="p-0 text-center" id="63"></td>
+              <td class="p-0 text-center" id="64"></td>
+              <td class="p-0 text-center" id="65"></td>
+              <td class="p-0 text-center" id="66"></td>
+              <td class="p-0 text-center" id="67"></td>
+              <td class="p-0 text-center" id="68"></td>
+              <td class="p-0 text-center" id="69"></td>
+              <td class="p-0 text-center" id="70"></td>
+              <td class="p-0 text-center" id="71"></td>
+              <td class="p-0 text-center"></td>
+            </tr>
+            <tr>
+              <th class="p-0"></th>
+              <td class="p-0 text-center"></td>
+              <td class="p-0 text-center"></td>
+              <th class="p-0 text-center pl-1 align-middle">Ac</th>
+              <td class="p-0 text-center" id="90"></td>
+              <td class="p-0 text-center" id="91"></td>
+              <td class="p-0 text-center" id="92"></td>
+              <td class="p-0 text-center" id="93"></td>
+              <td class="p-0 text-center" id="94"></td>
+              <td class="p-0 text-center" id="95"></td>
+              <td class="p-0 text-center" id="96"></td>
+              <td class="p-0 text-center" id="97"></td>
+              <td class="p-0 text-center" id="98"></td>
+              <td class="p-0 text-center" id="99"></td>
+              <td class="p-0 text-center" id="100"></td>
+              <td class="p-0 text-center" id="101"></td>
+              <td class="p-0 text-center" id="102"></td>
+              <td class="p-0 text-center" id="103"></td>
+              <td class="p-0 text-center"></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          If you want more information on the elements, here's a
+          <a href="https://ptable.com/?lang=en#Properties">better table</a>
+        </p>
+      </div>
+      <div
+        class="tab-pane fade container fluid"
+        id="pages-about"
+        role="tabpanel"
+        aria-labelledby="pages-about-tab"
+      >
+        <br /><br /><br /><br />
+        <table class="table text-center table-bordered">
+          <thead>
+            <tr>
+              <th>PTable</th>
+              <th>JMol</th>
+              <th>Greyscale</th>
+            </tr>
+          </thead>
+
+          <tr id="colorRow" class="d-none">
+            <td id="ptable"></td>
+            <td id="jmol"></td>
+            <td id="greyscale"></td>
+          </tr>
+          <tbody id="tableColors"></tbody>
+        </table>
+        <p>App Info</p>
+        <ul>
+          <li>Bootstrap</li>
+          <li>Font Awesome</li>
+          <li>jQuery</li>
+          <li>GitHub</li>
+        </ul>
+        <a href="https://jorgeamadosoria.info">Author Info</a>
+      </div>
     </div>
-    <div id="model" class="d-none d-inline-flex m-2">
+    <!-- Templates-->
+
+    <div
+      id="result"
+      class="
+        d-none
+        m-1
+        text-nowrap
+        border-success
+        border-info
+        border
+        border-width-5
+        border-bottom-0
+        border-top-0
+        border-right-0
+      "
+    >
+      <div id="content" class="d-inline-flex"></div>
+    </div>
+    <div id="model" class="d-none d-inline-flex">
       <svg xmlns="http://www.w3.org/2000/svg">
         <g>
-          <rect />
-          <text id="name" />
-          <text id="weight" />
-          <text id="number" />
+          <a id="link">
+            <rect />
+            <text id="symbol" />
+            <text id="name" />
+            <text id="weight" />
+            <text id="number" />
+          </a>
         </g>
       </svg>
     </div>
+    <!-- End Templates-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -79,22 +526,27 @@
       integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
       crossorigin="anonymous"
     ></script>
+    <script src="colors.js"></script>
     <script src="elements.js"></script>
     <script src="script.js"></script>
     <script>
-      //    printElement(4, "Fe", 55.8452, 26, "black", "grey");
-      //    printElement(4, "Vt", 55.8452, 26, "pink", "grey");
+      $("form input").keydown(clickOnReturn);
 
-      $("#btn").on("click", function () {
-        $("#results").empty();
-
-        var result = algorithm($("#word").val().toLowerCase());
-        result.forEach((element) => {
-          var onlyReal = checkResult(element);
-
-          printResult(element, onlyReal);
-        });
+      $("#btn").on("click", () => {
+        const word = $("#word").val().toLowerCase();
+        if (validateInput(word)) {
+          loading().then(() => {
+            generate().then(() => restore());
+          });
+        } else {
+          $("form input").val("");
+        }
       });
+
+      printColorTable();
+      printPeriodicTable();
+
+      executeWithUrlParams();
     </script>
   </body>
 </html>

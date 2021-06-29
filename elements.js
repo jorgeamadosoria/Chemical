@@ -387,7 +387,12 @@ const ELEMENTS = [
     name: "Platinum",
     weight: "195.08",
   },
-  { number: "79", symbol: "Au", name: "Gold", weight: "196.96" },
+  {
+    number: "79",
+    symbol: "Au",
+    name: "Gold",
+    weight: "196.96",
+  },
   { number: "80", symbol: "Hg", name: "Mercury", weight: "200.59" },
   {
     number: "81",
@@ -566,8 +571,9 @@ const ELEMENTS = [
 
 function checkElement(element) {
   for (var i = 0; i < ELEMENTS.length; i++)
-    if (ELEMENTS[i].symbol.toLowerCase() === element.toLowerCase())
+    if (ELEMENTS[i].symbol.toLowerCase() === element.toLowerCase()) {
       return { ...ELEMENTS[i], real: true };
+    }
   return createElement(element);
 }
 
@@ -587,4 +593,41 @@ function checkResult(result) {
   for (var i = 0; i < result.length; i++)
     onlyReal = onlyReal && checkElement(result[i]).real;
   return onlyReal;
+}
+
+function algorithm(word) {
+  var results = [[word[0]]];
+
+  for (var i = 1; i < word.length; i++) {
+    var len = results.length;
+    for (var j = 0; j < len; j++) {
+      if (results[j][results[j].length - 1].length === 1) {
+        const newResult = [...results[j], word[i]];
+        results[j][results[j].length - 1] =
+          results[j][results[j].length - 1] + word[i];
+        results.push(newResult);
+      } else {
+        results[j].push(word[i]);
+      }
+    }
+  }
+
+  return results;
+}
+
+function capitalize(e) {
+  return e.charAt(0).toUpperCase() + e.slice(1, e.length);
+}
+
+function executeWithUrlParams() {
+  var searchParams = new URLSearchParams(window.location.search);
+  var execute = false;
+  if (searchParams.has("word")) {
+    $("#word").val(searchParams.get("word").toLowerCase());
+    execute = true;
+  }
+  if (searchParams.has("color")) {
+    $("#" + searchParams.get("color").toLowerCase()).prop("checked", true);
+  }
+  if (execute) $("#btn").click();
 }
