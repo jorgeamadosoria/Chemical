@@ -153,18 +153,16 @@ function validateKey(e) {
   );
 }
 
-async function loading() {
-  alert(1);
+function loading() {
   $("#btn-loader").removeClass("d-none");
+  $("#btn").attr("disabled", true);
 }
 
-async function generate() {
-  const word = $("#word").val().toLowerCase();
-  const color = $("input[name='colorRadio']:checked").val().toLowerCase();
+function generate(results) {
   $(".element-container").text("No results");
-  var result = algorithm(word);
   $("#options").removeClass("d-none");
-  result = result.map((element) => {
+  const color = $("input[name='colorRadio']:checked");
+  var result = results.map((element) => {
     return { element, real: checkResult(element) };
   });
 
@@ -176,9 +174,9 @@ async function generate() {
   $("#resultsReal,#resultsNotReal").parent().collapse("show");
 }
 
-async function restore() {
-  alert(3);
+function restore() {
   $("#btn-loader").addClass("d-none");
+  $("#btn").attr("disabled", false);
 }
 
 function printColorRow(e, color) {
