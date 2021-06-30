@@ -1,6 +1,5 @@
 function algorithm(word) {
   var results = [[word[0]]];
-
   for (var i = 1; i < word.length; i++) {
     var len = results.length;
     for (var j = 0; j < len; j++) {
@@ -19,7 +18,5 @@ function algorithm(word) {
 }
 
 onmessage = function (e) {
-  const word = e.data[0];
-  const color = e.data[1];
-  postMessage(algorithm(word));
+  postMessage(algorithm(e.data));
 };

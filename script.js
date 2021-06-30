@@ -95,7 +95,7 @@ function printResult(result, color, onlyReal) {
   result.forEach(function (element) {
     var ele = checkElement(element);
     ele.name = null; // remove element name from home page, to account for fake elements
-    var colorObj = getColor(ele.symbol, color);
+    var colorObj = getColor(ele, color);
     printElement(
       $("#result #content"),
       "m-2",
@@ -161,11 +161,10 @@ function loading() {
 function generate(results) {
   $(".element-container").text("No results");
   $("#options").removeClass("d-none");
-  const color = $("input[name='colorRadio']:checked");
+  const color = $("input[name='colorRadio']:checked").val();
   var result = results.map((element) => {
     return { element, real: checkResult(element) };
   });
-
   result.forEach((element, index) => {
     printResult(element.element, color, element.real);
   });

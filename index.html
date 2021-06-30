@@ -532,27 +532,17 @@
     <script>
       $("form input").keydown(clickOnReturn);
 
-      function wait(ms) {
-        var d = new Date();
-        var d2 = null;
-        do {
-          d2 = new Date();
-        } while (d2 - d < ms);
-      }
+      const algWorker = new Worker("algorithm.js");
+      algWorker.onmessage = function (e) {
+        generate(e.data);
+        restore();
+      };
 
       $("#btn").on("click", () => {
         const word = $("#word").val().toLowerCase();
         if (validateInput(word)) {
           loading();
-          const color = $("input[name='colorRadio']:checked")
-            .val()
-            .toLowerCase();
-          var algWorker = new Worker("algorithm.js");
-          algWorker.postMessage([word, color]);
-          algWorker.onmessage = function (e) {
-            generate(e.data);
-            restore();
-          };
+          algWorker.postMessage(word);
         } else {
           $("form input").val("");
         }
