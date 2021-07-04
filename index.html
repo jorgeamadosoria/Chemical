@@ -26,22 +26,32 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="container-fluid">
-    <nav class="navbar w-100 navbar-expand-md navbar-light fixed-top bg-light">
-      <a class="navbar-brand" href="#">Chemical Words</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarText"
-        aria-controls="navbarText"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="w-100"></div>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mb-1" id="pages-tab" role="tablist">
+    <nav
+      class="
+        navbar
+        d-inline-flex
+        navbar-expand-md
+        fixed-top
+        navbar-light
+        bg-light
+      "
+    >
+      <div>
+        <a class="navbar-brand text-dark" href="#">Chemical Words</a>
+      </div>
+
+      <div class="ml-auto">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target=".navbar-collapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse w-100">
+        <ul class="nav navbar-nav mb-1 ml-auto" id="pages-tab" role="tablist">
           <li class="nav-item">
             <a
               class="nav-link active text-dark"
@@ -49,9 +59,17 @@
               data-toggle="pill"
               href="#pages-home"
               role="tab"
-              aria-controls="pages-home"
-              aria-selected="false"
               ><i class="fa-2x fas fa-home"></i
+            ></a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark"
+              id="pages-show-tab"
+              data-toggle="pill"
+              href="#pages-show"
+              role="tab"
+              ><i class="fa-2x fas fa-eye"></i
             ></a>
           </li>
           <li class="nav-item">
@@ -60,8 +78,7 @@
               id="pages-profile-tab"
               href="https://github.com/jorgeamadosoria/Chemical"
               role="tab"
-              aria-controls="pages-profile"
-              aria-selected="false"
+              target="_blank"
               ><i class="fa-2x fab fa-github"></i>
             </a>
           </li>
@@ -72,8 +89,6 @@
               data-toggle="pill"
               href="#pages-table"
               role="tab"
-              aria-controls="pages-table"
-              aria-selected="true"
               ><i class="fa-2x fas fa-table"></i>
             </a>
           </li>
@@ -84,126 +99,192 @@
               data-toggle="pill"
               href="#pages-about"
               role="tab"
-              aria-controls="pages-about"
-              aria-selected="false"
               ><i class="fa-2x fas fa-info-circle"></i
             ></a>
           </li>
         </ul>
       </div>
     </nav>
+
     <br />
     <div class="tab-content" id="pages-tabContent">
       <div
-        class="tab-pane fade container fluid show active"
+        class="tab-pane fade show active"
         id="pages-home"
         role="tabpanel"
         aria-labelledby="pages-home-tab"
       >
         <br /><br />
         <hr />
-        <form class="form-inline">
-          <div class="ml-2 mb-2 form-group">
-            <input
-              id="word"
-              maxlength="15"
-              type="text"
-              class="form-control"
-              placeholder="word to generate symbols"
-            />
+        <div class="row">
+          <div class="col-lg-5 col-md-7 col-sm-8">
+            <form class="form">
+              <div class="ml-2 mb-2 form-group">
+                <input
+                  id="word"
+                  maxlength="30"
+                  type="text"
+                  class="form-control"
+                  placeholder="word to generate symbols"
+                />
+              </div>
+              <div class="d-inline-flex">
+                <div class="ml-2 mb-2 form-group border pl-2 pt-2 pb-1">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="colorRadio"
+                      id="ptable"
+                      value="ptable"
+                      checked
+                    />
+                    <label class="form-check-label" for="ptableColor"
+                      >Ptable</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="colorRadio"
+                      id="jmol"
+                      value="jmol"
+                    />
+                    <label class="form-check-label" for="JMolColor">JMol</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="colorRadio"
+                      id="greyscale"
+                      value="grey"
+                    />
+                    <label class="form-check-label" for="greyScaleColor"
+                      >Greyscale</label
+                    >
+                  </div>
+                </div>
+                <button id="btn" type="button" class="btn btn-primary">
+                  <span
+                    id="btn-loader"
+                    class="d-none spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="btn-text">Generate</span>
+                </button>
+              </div>
+              <div class="ml-2 mb-2 form-group"></div>
+            </form>
           </div>
-          <div class="ml-2 mb-2 form-group border pl-2 pt-2 pb-1">
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="colorRadio"
-                id="ptable"
-                value="ptable"
-                checked
-              />
-              <label class="form-check-label" for="ptableColor">Ptable</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="colorRadio"
-                id="jmol"
-                value="jmol"
-              />
-              <label class="form-check-label" for="JMolColor">JMol</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="colorRadio"
-                id="greyscale"
-                value="grey"
-              />
-              <label class="form-check-label" for="greyScaleColor"
-                >Greyscale</label
-              >
-            </div>
-          </div>
-          <div class="ml-2 mb-2 form-group">
-            <button id="btn" type="button" class="btn btn-primary">
-              <span
-                id="btn-loader"
-                class="d-none spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              <span class="btn-text">Generate</span>
-            </button>
-          </div>
-          <div id="options" class="d-none">
-            <div class="ml-2 mb-2 form-group d-inline-flex">
-              <button
-                class="btn btn-success"
-                type="button"
-                data-toggle="collapse"
-                data-target="#realResultsCollapse"
-                aria-expanded="false"
-                aria-controls="realResultsCollapse"
-              >
-                <span id="btn-real" class="badge badge-light"></span>
-                Toggle Real Results
-              </button>
-            </div>
-            <div class="ml-2 mb-2 form-group d-inline-flex">
-              <button
-                class="btn btn-info"
-                type="button"
-                data-toggle="collapse"
-                data-target="#notRealResultsCollapse"
-                aria-expanded="false"
-                aria-controls="notRealResultsCollapse"
-              >
-                <span id="btn-fake" class="badge badge-light"></span>
-                Toggle Fake Results
-              </button>
+          <div class="col-lg-2 col-sm-4 d-none d-sm-block">
+            <div id="count" class="ml-5">
+              <h3>
+                <span class="badge badge-pill badge-success"
+                  ><span id="real"></span> real</span
+                >
+              </h3>
+              <h3>
+                <span class="badge badge-pill badge-info"
+                  ><span id="fake"></span> fake</span
+                >
+              </h3>
             </div>
           </div>
-        </form>
+          <div class="col-lg-5 col-md-5 d-none d-lg-block">
+            Valid input consists of one string of only letters with a max length
+            of 30 characters. The resulting combinations can be real (consisting
+            of existing chemical elements) or fake (with a mix of existing and
+            generated elements). They will be presented 20 at a time below, each
+            batch can change it's color scheme if selection changes.
+          </div>
+        </div>
         <hr />
-
-        <div class="collapse multi-collapse pt-1 pb-1" id="realResultsCollapse">
-          <div
-            id="resultsReal"
-            class="element-container card border-0 card-body"
-          ></div>
-        </div>
         <div
-          class="collapse multi-collapse pt-1 pb-1"
-          id="notRealResultsCollapse"
-        >
-          <div
-            id="resultsNotReal"
-            class="element-container card border-0 card-body"
-          ></div>
+          id="resultsReal"
+          class="element-container card border-0 card-body"
+        ></div>
+        <button id="more" class="btn btn-primary d-none">More</button>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pages-show"
+        role="tabpanel"
+        aria-labelledby="pages-show-tab"
+      >
+        <br /><br />
+        <hr />
+        <div class="row">
+          <div class="col-lg-5 col-md-7 col-sm-8">
+            <form class="form-inline">
+              <div class="ml-2 mb-2 form-group">
+                <input
+                  id="word-show"
+                  type="text"
+                  class="form-control"
+                  placeholder="fa,ce,s"
+                />
+              </div>
+              <div
+                class="ml-2 mb-2 form-group border d-inline-flex pl-2 pt-2 pb-1"
+              >
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="colorRadio-show"
+                    id="ptable-show"
+                    value="ptable"
+                    checked
+                  />
+                  <label class="form-check-label" for="ptableColor"
+                    >Ptable</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="colorRadio-show"
+                    id="jmol-show"
+                    value="jmol"
+                  />
+                  <label class="form-check-label" for="JMolColor">JMol</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="colorRadio-show"
+                    id="greyscale-show"
+                    value="grey"
+                  />
+                  <label class="form-check-label" for="greyScaleColor"
+                    >Greyscale</label
+                  >
+                </div>
+              </div>
+              <div class="ml-2 mb-2 form-group">
+                <button id="btn-show" type="button" class="btn btn-primary">
+                  Show
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-7 col-md-5 d-none d-md-block">
+            Valid input consists of a series of 1 or 2 letters, separate by
+            commas. Whitespaces around commas are trimmed, whitespaces between
+            letters invalidate the input. A valid input would be "f,ac, es"
+            without the quotes.
+          </div>
         </div>
+        <hr />
+        <div
+          id="resultShow"
+          class="element-container card border-0 card-body"
+        ></div>
       </div>
       <div
         class="tab-pane fade"
@@ -444,40 +525,121 @@
         </p>
       </div>
       <div
-        class="tab-pane fade container fluid"
+        class="tab-pane fade"
         id="pages-about"
         role="tabpanel"
         aria-labelledby="pages-about-tab"
       >
-        <br /><br /><br /><br />
-        <table class="table text-center table-bordered">
-          <thead>
-            <tr>
-              <th>PTable</th>
-              <th>JMol</th>
-              <th>Greyscale</th>
-            </tr>
-          </thead>
+        <br /><br /><br />
+        <div class="row">
+          <div class="col-8">
+            <div>
+              <h5>App Info</h5>
+              <p>
+                This application takes words and try to translate them into
+                combination of chemical elements. Not all words can be written
+                with chemical elements: in that case, pseudo-random elements are
+                generated to complete the words.
+              </p>
+              <p>
+                The elements are printed in one of three selectable scheme
+                colors, 20 at a time.
+              </p>
+              <p>
+                Aditionally, a particular combination of a word can be printed
+                with chemical elements. This is useful if there is a combination
+                sought, rather than checking all possible ones.
+              </p>
+            </div>
+            <div>
+              <h5>Color schemes</h5>
+              <ul>
+                <li>
+                  <a href="https://ptable.com/">Ptable</a>: A far superior
+                  visualizer of the periodic table. It contains a lot of
+                  information on chemical elements, details on the table and a
+                  convenient color scheme that I copied shamelessly.
+                </li>
+                <li>
+                  <a href="http://jmol.sourceforge.net/">Jmol</a>: This is a
+                  visualizer for molecules and complex chemical compounds. It
+                  has a convenient color code for most chemical elements except
+                  the latest ones.
+                </li>
+                <li>
+                  Greyscale: This is just a progressively black to white scheme
+                  that gets a lighter background as the atomic weight goes up.
+                  The text is dark on the light backgrounds and light on the
+                  dark backgrounds.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h5>Technologies</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a class="text-dark" href="https://getbootstrap.com/"
+                    >Bootstrap</a
+                  >
+                </li>
+                <li class="list-group-item">
+                  <a class="text-dark" href="https://fontawesome.com/"
+                    >Font Awesome</a
+                  >
+                </li>
+                <li class="list-group-item">
+                  <a class="text-dark" href="https://jquery.com/">jQuery</a>
+                </li>
+                <li class="list-group-item">
+                  <a class="text-dark" href="https://pages.github.com/"
+                    >GitHub Pages</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h5>Author Info</h5>
+              <p>
+                This is just one of many demos I do to learn new things or try
+                interesting (to me at least) concepts not necessarily related to
+                programming. You can check other demos and apps, as well as my
+                previous work experience in the following links.
+              </p>
+              <p><a href="https://jorgeamadosoria.info">Résumé</a></p>
+              <p>
+                <a href="https://portfolio-jasr.herokuapp.com/">Portfolio</a>
+              </p>
+            </div>
+          </div>
+          <div class="col-4">
+            <h5>Color schemes</h5>
+            <table class="table text-center table-bordered">
+              <thead>
+                <tr>
+                  <th>PTable</th>
+                  <th>JMol</th>
+                  <th>Greyscale</th>
+                </tr>
+              </thead>
 
-          <tr id="colorRow" class="d-none">
-            <td id="ptable"></td>
-            <td id="jmol"></td>
-            <td id="greyscale"></td>
-          </tr>
-          <tbody id="tableColors"></tbody>
-        </table>
-        <p>App Info</p>
-        <ul>
-          <li>Bootstrap</li>
-          <li>Font Awesome</li>
-          <li>jQuery</li>
-          <li>GitHub</li>
-        </ul>
-        <a href="https://jorgeamadosoria.info">Author Info</a>
+              <tr id="colorRow" class="d-none">
+                <td id="ptable" class="p-0 pt-1"></td>
+                <td id="jmol" class="p-0 pt-1"></td>
+                <td id="greyscale" class="p-0 pt-1"></td>
+              </tr>
+              <tbody id="tableColors"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
+    <button id="back-to-top" class="btn btn-light btn-lg back-to-top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
     <!-- Templates-->
-
+    <li id="page-link" class="page-item d-none">
+      <a class="page-link" href="#"></a>
+    </li>
     <div
       id="result"
       class="
@@ -530,28 +692,64 @@
     <script src="elements.js"></script>
     <script src="script.js"></script>
     <script>
+      var results = Array();
+      var currentPage = 1;
+      const PAGE_LIMIT = 20;
       $("form input").keydown(clickOnReturn);
 
       const algWorker = new Worker("algorithm.js");
+
       algWorker.onmessage = function (e) {
-        generate(e.data);
+        results = Array();
+        currentPage = 1;
+        e.data.forEach((e) => results.push(e));
+        //  pagination(results.length);
+        printResults(results);
         restore();
       };
 
+      setMoreHandler();
+
       $("#btn").on("click", () => {
-        const word = $("#word").val().toLowerCase();
-        if (validateInput(word)) {
-          loading();
-          algWorker.postMessage(word);
+        onClick(algWorker, $("#word").val().toLowerCase());
+      });
+
+      $("#btn-show").on("click", () => {
+        word = $("#word-show").val().toLowerCase();
+        if (validateShowResult(word)) {
+          $("#resultShow").empty();
+          printResult(
+            word,
+            $("input[name='colorRadio-show']:checked").val(),
+            true
+          );
         } else {
-          $("form input").val("");
+          if (word) alert(`${word} is not a valid string`);
         }
       });
 
       printColorTable();
       printPeriodicTable();
 
-      executeWithUrlParams();
+      executeWithUrlParams(algWorker);
+
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 200) {
+          $("#back-to-top").fadeIn();
+        } else {
+          $("#back-to-top").fadeOut();
+        }
+      });
+      // scroll body to 0px on click
+      $("#back-to-top").click(function () {
+        $("body,html").animate(
+          {
+            scrollTop: 0,
+          },
+          400
+        );
+        return false;
+      });
     </script>
   </body>
 </html>

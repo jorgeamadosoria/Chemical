@@ -570,14 +570,18 @@ const ELEMENTS = [
 ];
 
 function checkElement(element) {
-  for (var i = 0; i < ELEMENTS.length; i++)
-    if (ELEMENTS[i].symbol.toLowerCase() === element.toLowerCase()) {
-      return { ...ELEMENTS[i], real: true };
-    }
-  return createElement(element);
+  var i = 0;
+  while (
+    i < ELEMENTS.length &&
+    ELEMENTS[i++].symbol.toLowerCase() !== element.element.toLowerCase()
+  );
+
+  return i === ELEMENTS.length
+    ? fakeElement(element.element)
+    : { ...ELEMENTS[i - 1], real: true };
 }
 
-function createElement(name) {
+function fakeElement(name) {
   var weight =
     500 + name.charCodeAt(0) + (name.length > 1 ? name.charCodeAt(1) : 0);
   var number =
@@ -588,26 +592,6 @@ function createElement(name) {
   return { symbol: name, weight, number, real: false };
 }
 
-function checkResult(result) {
-  var onlyReal = true;
-  for (var i = 0; i < result.length; i++)
-    onlyReal = onlyReal && checkElement(result[i]).real;
-  return onlyReal;
-}
-
 function capitalize(e) {
   return e.charAt(0).toUpperCase() + e.slice(1, e.length);
-}
-
-function executeWithUrlParams() {
-  var searchParams = new URLSearchParams(window.location.search);
-  var execute = false;
-  if (searchParams.has("word")) {
-    $("#word").val(searchParams.get("word").toLowerCase());
-    execute = true;
-  }
-  if (searchParams.has("color")) {
-    $("#" + searchParams.get("color").toLowerCase()).prop("checked", true);
-  }
-  if (execute) $("#btn").click();
 }

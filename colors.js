@@ -1,592 +1,592 @@
 const COLORS = new Map();
 
-COLORS["H"] = {
+COLORS["h"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "black", bg: "FFFFFF" },
   grey: { stroke: "white", bg: "010101" },
 };
-COLORS["He"] = {
+COLORS["he"] = {
   ptable: { stroke: "black", bg: "#e5bee4" },
   jmol: { stroke: "black", bg: "D9FFFF" },
   grey: { stroke: "white", bg: "030303" },
 };
-COLORS["Li"] = {
+COLORS["li"] = {
   ptable: { stroke: "black", bg: "#eace5d" },
   jmol: { stroke: "black", bg: "CC80FF" },
   grey: { stroke: "white", bg: "050505" },
 };
-COLORS["Be"] = {
+COLORS["be"] = {
   ptable: { stroke: "black", bg: "#f1f165" },
   jmol: { stroke: "black", bg: "C2FF00" },
   grey: { stroke: "white", bg: "070707" },
 };
-COLORS["B"] = {
+COLORS["b"] = {
   ptable: { stroke: "black", bg: "#9ee5d4" },
   jmol: { stroke: "black", bg: "FFB5B5" },
   grey: { stroke: "white", bg: "090909" },
 };
-COLORS["C"] = {
+COLORS["c"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "black", bg: "909090" },
   grey: { stroke: "white", bg: "0B0B0B" },
 };
-COLORS["N"] = {
+COLORS["n"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "white", bg: "3050F8" },
   grey: { stroke: "white", bg: "0F0F0F" },
 };
-COLORS["O"] = {
+COLORS["o"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "black", bg: "FF0D0D" },
   grey: { stroke: "white", bg: "111111" },
 };
-COLORS["F"] = {
+COLORS["f"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "black", bg: "90E050" },
   grey: { stroke: "white", bg: "131313" },
 };
-COLORS["Ne"] = {
+COLORS["ne"] = {
   ptable: { stroke: "black", bg: "#e5bee4" },
   jmol: { stroke: "black", bg: "B3E3F5" },
   grey: { stroke: "white", bg: "151515" },
 };
-COLORS["Na"] = {
+COLORS["na"] = {
   ptable: { stroke: "black", bg: "#eace5d" },
   jmol: { stroke: "black", bg: "AB5CF2" },
   grey: { stroke: "white", bg: "171717" },
 };
-COLORS["Mg"] = {
+COLORS["mg"] = {
   ptable: { stroke: "black", bg: "#f1f165" },
   jmol: { stroke: "black", bg: "8AFF00" },
   grey: { stroke: "white", bg: "191919" },
 };
-COLORS["Al"] = {
+COLORS["al"] = {
   ptable: { stroke: "black", bg: "#abe0eb" },
   jmol: { stroke: "black", bg: "BFA6A6" },
   grey: { stroke: "white", bg: "1B1B1B" },
 };
-COLORS["Si"] = {
+COLORS["si"] = {
   ptable: { stroke: "black", bg: "#9ee5d4" },
   jmol: { stroke: "black", bg: "F0C8A0" },
   grey: { stroke: "white", bg: "1D1D1D" },
 };
-COLORS["P"] = {
+COLORS["p"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "black", bg: "FF8000" },
   grey: { stroke: "white", bg: "1F1F1F" },
 };
-COLORS["S"] = {
+COLORS["s"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "black", bg: "FFFF30" },
   grey: { stroke: "white", bg: "212121" },
 };
-COLORS["Cl"] = {
+COLORS["cl"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "black", bg: "1FF01F" },
   grey: { stroke: "white", bg: "232323" },
 };
-COLORS["Ar"] = {
+COLORS["ar"] = {
   ptable: { stroke: "black", bg: "#e5bee4" },
   jmol: { stroke: "black", bg: "80D1E3" },
   grey: { stroke: "white", bg: "252525" },
 };
-COLORS["K"] = {
+COLORS["k"] = {
   ptable: { stroke: "black", bg: "#eace5d" },
   jmol: { stroke: "white", bg: "8F40D4" },
   grey: { stroke: "white", bg: "272727" },
 };
-COLORS["Ca"] = {
+COLORS["ca"] = {
   ptable: { stroke: "black", bg: "#f1f165" },
   jmol: { stroke: "black", bg: "3DFF00" },
   grey: { stroke: "white", bg: "292929" },
 };
-COLORS["Sc"] = {
+COLORS["sc"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "E6E6E6" },
   grey: { stroke: "white", bg: "2B2B2B" },
 };
-COLORS["Ti"] = {
+COLORS["ti"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "BFC2C7" },
   grey: { stroke: "white", bg: "2D2D2D" },
 };
-COLORS["V"] = {
+COLORS["v"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "A6A6AB" },
   grey: { stroke: "white", bg: "2F2F2F" },
 };
-COLORS["Cr"] = {
+COLORS["cr"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "8A99C7" },
   grey: { stroke: "white", bg: "313131" },
 };
-COLORS["Mn"] = {
+COLORS["mn"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "9C7AC7" },
   grey: { stroke: "white", bg: "333333" },
 };
-COLORS["Fe"] = {
+COLORS["fe"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "E06633" },
   grey: { stroke: "white", bg: "353535" },
 };
-COLORS["Co"] = {
+COLORS["co"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "F090A0" },
   grey: { stroke: "white", bg: "373737" },
 };
-COLORS["Ni"] = {
+COLORS["ni"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "50D050" },
   grey: { stroke: "white", bg: "393939" },
 };
-COLORS["Cu"] = {
+COLORS["cu"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "C88033" },
   grey: { stroke: "white", bg: "3B3B3B" },
 };
-COLORS["Zn"] = {
+COLORS["zn"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "7D80B0" },
   grey: { stroke: "white", bg: "3D3D3D" },
 };
-COLORS["Ga"] = {
+COLORS["ga"] = {
   ptable: { stroke: "black", bg: "#abe0eb" },
   jmol: { stroke: "black", bg: "C28F8F" },
   grey: { stroke: "white", bg: "3F3F3F" },
 };
-COLORS["Ge"] = {
+COLORS["ge"] = {
   ptable: { stroke: "black", bg: "#9ee5d4" },
   jmol: { stroke: "black", bg: "668F8F" },
   grey: { stroke: "white", bg: "414141" },
 };
-COLORS["As"] = {
+COLORS["as"] = {
   ptable: { stroke: "black", bg: "#9ee5d4" },
   jmol: { stroke: "black", bg: "BD80E3" },
   grey: { stroke: "white", bg: "434343" },
 };
-COLORS["Se"] = {
+COLORS["se"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "black", bg: "FFA100" },
   grey: { stroke: "white", bg: "454545" },
 };
-COLORS["Br"] = {
+COLORS["br"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "white", bg: "A62929" },
   grey: { stroke: "white", bg: "474747" },
 };
-COLORS["Kr"] = {
+COLORS["kr"] = {
   ptable: { stroke: "black", bg: "#e5bee4" },
   jmol: { stroke: "black", bg: "5CB8D1" },
   grey: { stroke: "white", bg: "494949" },
 };
-COLORS["Rb"] = {
+COLORS["rb"] = {
   ptable: { stroke: "black", bg: "#eace5d" },
   jmol: { stroke: "white", bg: "702EB0" },
   grey: { stroke: "white", bg: "4B4B4B" },
 };
-COLORS["Sr"] = {
+COLORS["sr"] = {
   ptable: { stroke: "black", bg: "#f1f165" },
   jmol: { stroke: "black", bg: "00FF00" },
   grey: { stroke: "white", bg: "4D4D4D" },
 };
-COLORS["Y"] = {
+COLORS["y"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "94FFFF" },
   grey: { stroke: "white", bg: "4F4F4F" },
 };
-COLORS["Zr"] = {
+COLORS["zr"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "94E0E0" },
   grey: { stroke: "white", bg: "515151" },
 };
-COLORS["Nb"] = {
+COLORS["nb"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "73C2C9" },
   grey: { stroke: "white", bg: "535353" },
 };
-COLORS["Mo"] = {
+COLORS["mo"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "54B5B5" },
   grey: { stroke: "white", bg: "555555" },
 };
-COLORS["Tc"] = {
+COLORS["tc"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "3B9E9E" },
   grey: { stroke: "white", bg: "575757" },
 };
-COLORS["Ru"] = {
+COLORS["ru"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "248F8F" },
   grey: { stroke: "white", bg: "595959" },
 };
-COLORS["Rh"] = {
+COLORS["rh"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "white", bg: "0A7D8C" },
   grey: { stroke: "white", bg: "5B5B5B" },
 };
-COLORS["Pd"] = {
+COLORS["pd"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "white", bg: "006985" },
   grey: { stroke: "white", bg: "5D5D5D" },
 };
-COLORS["Ag"] = {
+COLORS["ag"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "C0C0C0" },
   grey: { stroke: "white", bg: "5F5F5F" },
 };
-COLORS["Cd"] = {
+COLORS["cd"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "FFD98F" },
   grey: { stroke: "white", bg: "616161" },
 };
-COLORS["In"] = {
+COLORS["in"] = {
   ptable: { stroke: "black", bg: "#abe0eb" },
   jmol: { stroke: "black", bg: "A67573" },
   grey: { stroke: "white", bg: "636363" },
 };
-COLORS["Sn"] = {
+COLORS["sn"] = {
   ptable: { stroke: "black", bg: "#abe0eb" },
   jmol: { stroke: "black", bg: "668080" },
   grey: { stroke: "white", bg: "656565" },
 };
-COLORS["Sb"] = {
+COLORS["sb"] = {
   ptable: { stroke: "black", bg: "#9ee5d4" },
   jmol: { stroke: "black", bg: "9E63B5" },
   grey: { stroke: "white", bg: "676767" },
 };
-COLORS["Te"] = {
+COLORS["te"] = {
   ptable: { stroke: "black", bg: "#9ee5d4" },
   jmol: { stroke: "black", bg: "D47A00" },
   grey: { stroke: "white", bg: "696969" },
 };
-COLORS["I"] = {
+COLORS["i"] = {
   ptable: { stroke: "black", bg: "#8bed8c" },
   jmol: { stroke: "white", bg: "940094" },
   grey: { stroke: "white", bg: "6B6B6B" },
 };
-COLORS["Xe"] = {
+COLORS["xe"] = {
   ptable: { stroke: "black", bg: "#e5bee4" },
   jmol: { stroke: "black", bg: "429EB0" },
   grey: { stroke: "white", bg: "6D6D6D" },
 };
-COLORS["Cs"] = {
+COLORS["cs"] = {
   ptable: { stroke: "black", bg: "#eace5d" },
   jmol: { stroke: "white", bg: "57178F" },
   grey: { stroke: "white", bg: "6F6F6F" },
 };
-COLORS["Ba"] = {
+COLORS["ba"] = {
   ptable: { stroke: "black", bg: "#f1f165" },
   jmol: { stroke: "black", bg: "00C900" },
   grey: { stroke: "white", bg: "717171" },
 };
-COLORS["La"] = {
+COLORS["la"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "70D4FF" },
   grey: { stroke: "white", bg: "737373" },
 };
-COLORS["Ce"] = {
+COLORS["ce"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "FFFFC7" },
   grey: { stroke: "white", bg: "757575" },
 };
-COLORS["Pr"] = {
+COLORS["pr"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "D9FFC7" },
   grey: { stroke: "white", bg: "777777" },
 };
 
-COLORS["Nd"] = {
+COLORS["nd"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "C7FFC7" },
   grey: { stroke: "white", bg: "797979" },
 };
-COLORS["Pm"] = {
+COLORS["pm"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "A3FFC7" },
   grey: { stroke: "white", bg: "7B7B7B" },
 };
-COLORS["Sm"] = {
+COLORS["sm"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "8FFFC7" },
   grey: { stroke: "white", bg: "7D7D7D" },
 };
-COLORS["Eu"] = {
+COLORS["eu"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "61FFC7" },
   grey: { stroke: "white", bg: "7F7F7F" },
 };
-COLORS["Gd"] = {
+COLORS["gd"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "45FFC7" },
   grey: { stroke: "white", bg: "838383" },
 };
-COLORS["Tb"] = {
+COLORS["tb"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "30FFC7" },
   grey: { stroke: "white", bg: "858585" },
 };
-COLORS["Dy"] = {
+COLORS["dy"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "1FFFC7" },
   grey: { stroke: "white", bg: "8B8B8B" },
 };
-COLORS["Ho"] = {
+COLORS["ho"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "00FF9C" },
-  grey: { stroke: "black", bg: "8D8D8D" },
+  grey: { stroke: "white", bg: "8D8D8D" },
 };
-COLORS["Er"] = {
+COLORS["er"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "00E675" },
-  grey: { stroke: "black", bg: "919191" },
+  grey: { stroke: "white", bg: "919191" },
 };
-COLORS["Tm"] = {
+COLORS["tm"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "00D452" },
-  grey: { stroke: "black", bg: "979797" },
+  grey: { stroke: "white", bg: "979797" },
 };
-COLORS["Yb"] = {
+COLORS["yb"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "00BF38" },
-  grey: { stroke: "black", bg: "9B9B9B" },
+  grey: { stroke: "white", bg: "9B9B9B" },
 };
-COLORS["Lu"] = {
+COLORS["lu"] = {
   ptable: { stroke: "black", bg: "#e8d19b" },
   jmol: { stroke: "black", bg: "00AB24" },
-  grey: { stroke: "black", bg: "9D9D9D" },
+  grey: { stroke: "white", bg: "9D9D9D" },
 };
-COLORS["Hf"] = {
+COLORS["hf"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "4DC2FF" },
-  grey: { stroke: "black", bg: "A1A1A1" },
+  grey: { stroke: "white", bg: "A1A1A1" },
 };
-COLORS["Ta"] = {
+COLORS["ta"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "4DA6FF" },
-  grey: { stroke: "black", bg: "A3A3A3" },
+  grey: { stroke: "white", bg: "A3A3A3" },
 };
-COLORS["W"] = {
+COLORS["w"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "2194D6" },
   grey: { stroke: "black", bg: "A7A7A7" },
 };
-COLORS["Re"] = {
+COLORS["re"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "267DAB" },
   grey: { stroke: "black", bg: "A9A9A9" },
 };
-COLORS["Os"] = {
+COLORS["os"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "white", bg: "266696" },
   grey: { stroke: "black", bg: "ABABAB" },
 };
-COLORS["Ir"] = {
+COLORS["ir"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "white", bg: "175487" },
   grey: { stroke: "black", bg: "ADADAD" },
 };
-COLORS["Pt"] = {
+COLORS["pt"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "D0D0E0" },
   grey: { stroke: "black", bg: "AFAFAF" },
 };
-COLORS["Au"] = {
+COLORS["au"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "FFD123" },
   grey: { stroke: "black", bg: "B1B1B1" },
 };
-COLORS["Hg"] = {
+COLORS["hg"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "B8B8D0" },
   grey: { stroke: "black", bg: "B3B3B3" },
 };
-COLORS["Tl"] = {
+COLORS["tl"] = {
   ptable: { stroke: "black", bg: "#abe0eb" },
   jmol: { stroke: "black", bg: "A6544D" },
   grey: { stroke: "black", bg: "B5B5B5" },
 };
-COLORS["Pb"] = {
+COLORS["pb"] = {
   ptable: { stroke: "black", bg: "#abe0eb" },
   jmol: { stroke: "white", bg: "575961" },
   grey: { stroke: "black", bg: "B7B7B7" },
 };
-COLORS["Bi"] = {
+COLORS["bi"] = {
   ptable: { stroke: "black", bg: "#abe0eb" },
   jmol: { stroke: "black", bg: "9E4FB5" },
   grey: { stroke: "black", bg: "B9B9B9" },
 };
-COLORS["Po"] = {
+COLORS["po"] = {
   ptable: { stroke: "black", bg: "#abe0eb" },
   jmol: { stroke: "black", bg: "AB5C00" },
   grey: { stroke: "black", bg: "BBBBBB" },
 };
-COLORS["At"] = {
+COLORS["at"] = {
   ptable: { stroke: "black", bg: "#9ee5d4" },
   jmol: { stroke: "white", bg: "754F45" },
   grey: { stroke: "black", bg: "BDBDBD" },
 };
-COLORS["Rn"] = {
+COLORS["rn"] = {
   ptable: { stroke: "black", bg: "#e5bee4" },
   jmol: { stroke: "black", bg: "428296" },
   grey: { stroke: "black", bg: "BFBFBF" },
 };
-COLORS["Fr"] = {
+COLORS["fr"] = {
   ptable: { stroke: "black", bg: "#eace5d" },
   jmol: { stroke: "white", bg: "420066" },
   grey: { stroke: "black", bg: "C1C1C1" },
 };
-COLORS["Ra"] = {
+COLORS["ra"] = {
   ptable: { stroke: "black", bg: "#f1f165" },
   jmol: { stroke: "black", bg: "007D00" },
   grey: { stroke: "black", bg: "C3C3C3" },
 };
-COLORS["Ac"] = {
+COLORS["ac"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "70ABFA" },
   grey: { stroke: "black", bg: "C5C5C5" },
 };
-COLORS["Th"] = {
+COLORS["th"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "00BAFF" },
   grey: { stroke: "black", bg: "C7C7C7" },
 };
-COLORS["Pa"] = {
+COLORS["pa"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "00A1FF" },
   grey: { stroke: "black", bg: "C9C9C9" },
 };
-COLORS["U"] = {
+COLORS["u"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "008FFF" },
   grey: { stroke: "black", bg: "CBCBCB" },
 };
-COLORS["Np"] = {
+COLORS["np"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "0080FF" },
   grey: { stroke: "black", bg: "CDCDCD" },
 };
-COLORS["Pu"] = {
+COLORS["pu"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "006BFF" },
   grey: { stroke: "black", bg: "CFCFCF" },
 };
-COLORS["Am"] = {
+COLORS["am"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "545CF2" },
   grey: { stroke: "black", bg: "D1D1D1" },
 };
-COLORS["Cm"] = {
+COLORS["cm"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "785CE3" },
   grey: { stroke: "black", bg: "D3D3D3" },
 };
-COLORS["Bk"] = {
+COLORS["bk"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "8A4FE3" },
   grey: { stroke: "black", bg: "D5D5D5" },
 };
-COLORS["Cf"] = {
+COLORS["cf"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "A136D4" },
   grey: { stroke: "black", bg: "D7D7D7" },
 };
-COLORS["Es"] = {
+COLORS["es"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "B31FD4" },
   grey: { stroke: "black", bg: "D9D9D9" },
 };
-COLORS["Fm"] = {
+COLORS["fm"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "B31FBA" },
   grey: { stroke: "black", bg: "DBDBDB" },
 };
-COLORS["Md"] = {
+COLORS["md"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "B30DA6" },
   grey: { stroke: "black", bg: "DDDDDD" },
 };
-COLORS["No"] = {
+COLORS["no"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "BD0D87" },
   grey: { stroke: "black", bg: "DFDFDF" },
 };
-COLORS["Lr"] = {
+COLORS["lr"] = {
   ptable: { stroke: "black", bg: "#f4ccda" },
   jmol: { stroke: "black", bg: "C70066" },
   grey: { stroke: "black", bg: "E1E1E1" },
 };
-COLORS["Rf"] = {
+COLORS["rf"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "CC0059" },
   grey: { stroke: "black", bg: "E3E3E3" },
 };
-COLORS["Db"] = {
+COLORS["db"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "D1004F" },
   grey: { stroke: "black", bg: "E5E5E5" },
 };
-COLORS["Sg"] = {
+COLORS["sg"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "D90045" },
   grey: { stroke: "black", bg: "E7E7E7" },
 };
-COLORS["Bh"] = {
+COLORS["bh"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "E00038" },
   grey: { stroke: "black", bg: "E9E9E9" },
 };
-COLORS["Hs"] = {
+COLORS["hs"] = {
   ptable: { stroke: "black", bg: "#fbc5b6" },
   jmol: { stroke: "black", bg: "E6002E" },
   grey: { stroke: "black", bg: "EBEBEB" },
 };
-COLORS["Mt"] = {
+COLORS["mt"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "EDEDED" },
 };
-COLORS["Ds"] = {
+COLORS["ds"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "EFEFEF" },
 };
-COLORS["Rg"] = {
+COLORS["rg"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "F1F1F1" },
 };
-COLORS["Cn"] = {
+COLORS["cn"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "F3F3F3" },
 };
-COLORS["Nh"] = {
+COLORS["nh"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "F5F5F5" },
 };
-COLORS["Fl"] = {
+COLORS["fl"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "F7F7F7" },
 };
-COLORS["Mc"] = {
+COLORS["mc"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "F9F9F9" },
 };
-COLORS["Lv"] = {
+COLORS["lv"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "FBFBFB" },
 };
-COLORS["Ts"] = {
+COLORS["ts"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "FDFDFD" },
 };
-COLORS["Og"] = {
+COLORS["og"] = {
   ptable: { stroke: "black", bg: "#eeeeee" },
   jmol: { stroke: "black", bg: "EB0026" },
   grey: { stroke: "black", bg: "FFFFFF" },
@@ -599,17 +599,20 @@ const GREYSCALE_COLOR = "grey";
 function getColor(ele, color) {
   switch (color) {
     case PTABLE_COLOR:
-      if (COLORS[ele.symbol]) return COLORS[ele.symbol].ptable;
-      return stringToColour(ele, color);
+      return COLORS[ele.symbol.toLowerCase()]
+        ? COLORS[ele.symbol.toLowerCase()].ptable
+        : stringToColor(ele, color);
     case JMOL_COLOR:
-      if (COLORS[ele.symbol]) return COLORS[ele.symbol].jmol;
-      return stringToColour(ele, color);
+      return COLORS[ele.symbol.toLowerCase()]
+        ? COLORS[ele.symbol.toLowerCase()].jmol
+        : stringToColor(ele, color);
     case GREYSCALE_COLOR:
-      if (COLORS[ele.symbol]) return COLORS[ele.symbol].grey;
-      return generateGrey(ele);
+      return COLORS[ele.symbol.toLowerCase()]
+        ? COLORS[ele.symbol.toLowerCase()].grey
+        : generateGrey(ele);
   }
 
-  return stringToColour(ele, color);
+  return stringToColor(ele, color);
 }
 
 //https://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
@@ -636,7 +639,7 @@ function generateGrey(ele, color) {
   };
 }
 
-function stringToColour(ele, color) {
+function stringToColor(ele, color) {
   var code = ele.weight;
   var bg = code.toString(16);
   if (code >= 100) bg = code * 1000 + code;

@@ -1,30 +1,38 @@
 const HOME_SIZE_FACTOR = 2;
+const SCHEME_SIZE_FACTOR = 0.75;
 const TABLE_SIZE_FACTOR = 1.2;
-function printElement(container, classes, sizeFactor, element, stroke, fill) {
-  var model = $("#model").clone();
-  var strokeColor = stroke ? stroke : "black";
-  var fillColor = fill ? fill : "white";
-  var config = element.name
-    ? {
-        numberY: 10,
-        numberX: 2,
-        numberFontSize: 10,
-        numberAnchor: "start",
-        weightFontSize: 10,
-        weightY: 10,
-        weightX: 48,
-        symbolY: 34,
-      }
-    : {
-        numberY: 46,
-        numberX: 25,
-        numberFontSize: 10,
-        numberAnchor: "middle",
-        weightFontSize: 10,
-        weightY: 10,
-        weightX: 48,
-        symbolY: 33.5,
-      };
+const namedElementConfig = {
+  numberY: 10,
+  numberX: 2,
+  numberFontSize: 10,
+  numberAnchor: "start",
+  weightFontSize: 10,
+  weightY: 10,
+  weightX: 48,
+  symbolY: 34,
+};
+const unnamedElementConfig = {
+  numberY: 46,
+  numberX: 25,
+  numberFontSize: 10,
+  numberAnchor: "middle",
+  weightFontSize: 10,
+  weightY: 10,
+  weightX: 48,
+  symbolY: 33.5,
+};
+
+const resultTemplate = $("#result");
+const realResContainer = $("#resultsReal");
+const showContainer = $("#resultShow");
+const modelTemplate = $("#model");
+
+function printElement(sizeFactor, element, color, classes = "") {
+  const colorCfg = getColor(element, color);
+  var model = modelTemplate.clone();
+  var strokeColor = colorCfg.stroke ? colorCfg.stroke : "black";
+  var fillColor = colorCfg.bg ? colorCfg.bg : "white";
+  var config = element.name ? namedElementConfig : unnamedElementConfig;
   model
     .removeClass("d-none")
     .addClass(classes)
@@ -36,11 +44,11 @@ function printElement(container, classes, sizeFactor, element, stroke, fill) {
     .find("g")
     .find("rect")
     .attr("stroke", strokeColor)
-    .attr("stroke-width", 1 * sizeFactor)
-    .attr("width", 48 * sizeFactor)
-    .attr("height", 48 * sizeFactor)
-    .attr("y", 1 * sizeFactor)
-    .attr("x", 1 * sizeFactor)
+    .attr("stroke-width", sizeFactor)
+    .attr("width", "96%")
+    .attr("height", "96%")
+    .attr("y", sizeFactor)
+    .attr("x", sizeFactor)
     .attr("fill", "none")
     .end()
     .find("#symbol")
@@ -87,35 +95,82 @@ function printElement(container, classes, sizeFactor, element, stroke, fill) {
     .attr("text-anchor", config.numberAnchor)
     .attr("font-family", "serif");
 
-  container.append($(model));
+  return model;
 }
 
-function printResult(result, color, onlyReal) {
-  var container = $(onlyReal ? "#resultsReal" : "#resultsNotReal");
-  result.forEach(function (element) {
-    var ele = checkElement(element);
-    ele.name = null; // remove element name from home page, to account for fake elements
-    var colorObj = getColor(ele, color);
-    printElement(
-      $("#result #content"),
-      "m-2",
-      HOME_SIZE_FACTOR,
-      ele,
-      colorObj.stroke,
-      colorObj.bg
-    );
-  });
-  var newResult = $("#result").clone();
-  if (onlyReal) {
-    $(newResult).removeClass("d-none border-info");
+function onClick(worker, word) {
+  if (validateInput(word)) {
+    loading();
+    algWorker.postMessage([word, ELEMENTS]);
   } else {
-    $(newResult).removeClass("d-none border-success");
+    if (word) alert(`${word} is not a valid input`);
+    $("#resultsReal").empty();
+    $("#more").addClass("d-none");
+    $("#word").val("");
   }
+}
+
+function executeWithUrlParams(worker) {
+  var searchParams = new URLSearchParams(window.location.search);
+  var execute = false;
+  var word = "";
+  if (searchParams.has("word")) {
+    word = searchParams.get("word").toLowerCase();
+    $("#word").val(word);
+    execute = true;
+  }
+  if (searchParams.has("color")) {
+    $("#" + searchParams.get("color").toLowerCase()).prop("checked", true);
+  }
+  if (execute) onClick(worker, word);
+}
+
+function validateShowResult(result) {
+  return result
+    .split(",")
+    .every(
+      (ele) => ele.trim().length <= 2 && ele.trim().match(/^[A-Za-z]{1,2}$/g)
+    );
+}
+
+function prepareShowResult(result) {
+  var result = {
+    elements: result.split(",").map((ele) => {
+      return {
+        element: ele.trim(),
+        real: COLORS[ele.toLowerCase()] ? true : false,
+      };
+    }),
+    real: false,
+  };
+
+  result.real = result.elements.every((r) => r.real);
+
+  return result;
+}
+
+function printResult(result, color, isShow = false) {
+  var newResult = resultTemplate.clone();
   newResult.attr("id", "");
 
-  $("#result #content").empty();
-  if (!container.children().length) container.empty();
-  container.append(newResult);
+  result = isShow ? prepareShowResult(result) : result;
+  result.elements.forEach((e) => {
+    ele = checkElement(e);
+    ele.name = null; // remove element name from home page, to account for fake elements
+    newResult
+      .find("#content")
+      .append(printElement(HOME_SIZE_FACTOR, ele, color, "m-2"));
+  });
+  appendToContainer(result.real, newResult, isShow);
+}
+
+function appendToContainer(isReal, jqueryElement, isShow) {
+  var container = isShow ? showContainer : realResContainer;
+  // if (!container.children().length) container.empty();
+  jqueryElement.removeClass(
+    isReal ? "d-none border-info" : "d-none border-success"
+  );
+  container.append(jqueryElement);
 }
 
 function clickOnReturn(e) {
@@ -137,40 +192,95 @@ function clickOnReturn(e) {
   }
 }
 
+function clickOnReturnShow(e) {
+  if (e.keyCode == 13) {
+    $("#btn-show").click();
+    e.preventDefault();
+    return false;
+  }
+
+  if (
+    e.keyCode !== 8 &&
+    e.keyCode !== 16 &&
+    e.keyCode !== 93 &&
+    e.keyCode !== 20 &&
+    validateKey(e, true)
+  ) {
+    e.preventDefault();
+    return false;
+  }
+}
+
 function validateInput(word) {
   return (
+    word.length &&
     word.length ===
-    Array.from(word).filter((e) => validateKey({ keyCode: e })).length
+      Array.from(word).filter((e) => validateKey({ keyCode: e })).length
   );
 }
 
-function validateKey(e) {
+function validateKey(e, includeComma = false) {
   return (
-    (e.keyCode.charCodeAt(0) >= "A".charCodeAt(0) && //A = 65
-      e.keyCode.charCodeAt(0) <= "Z".charCodeAt(0)) || //Z = 90
-    (e.keyCode.charCodeAt(0) >= "a".charCodeAt(0) && // a = 97
-      e.keyCode.charCodeAt(0) <= "z".charCodeAt(0)) // z = 122
+    e &&
+    e.keyCode &&
+    ((e.keyCode >= "A" && //A = 65
+      e.keyCode <= "Z") || //Z = 90
+      (e.keyCode >= "a" && // a = 97
+        e.keyCode <= "z") || // z = 122
+      (includeComma && e.keyCode === ","))
   );
 }
 
 function loading() {
+  $("#count #real").html(0);
+  $("#count #fake").html(0);
   $("#btn-loader").removeClass("d-none");
   $("#btn").attr("disabled", true);
 }
 
-function generate(results) {
+function setMoreHandler() {
+  $("#more").on("click", () => {
+    printPage(
+      results,
+      currentPage,
+      $("input[name='colorRadio']:checked").val()
+    );
+    currentPage++;
+    if ((currentPage - 1) * PAGE_LIMIT >= results.length)
+      $("#more").addClass("d-none");
+  });
+}
+
+function printResults(results) {
   $(".element-container").text("No results");
-  $("#options").removeClass("d-none");
+
   const color = $("input[name='colorRadio']:checked").val();
-  var result = results.map((element) => {
-    return { element, real: checkResult(element) };
+
+  realCount = 0;
+  fakeCount = 0;
+  results.forEach((e) => (e.real ? realCount++ : fakeCount++));
+  $("#count #real").html(realCount);
+  $("#count #fake").html(fakeCount);
+
+  if (results.length) $("#resultsReal").empty();
+
+  results.sort((e1, e2) => {
+    res = e2.real - e1.real;
+    if (!res) return e1.elements.length - e2.elements.length;
+    return res;
   });
-  result.forEach((element, index) => {
-    printResult(element.element, color, element.real);
-  });
-  $("#btn-real").html($("#resultsReal").children().length);
-  $("#btn-fake").html($("#resultsNotReal").children().length);
-  $("#resultsReal,#resultsNotReal").parent().collapse("show");
+
+  printPage(results, currentPage++, color);
+}
+
+function printPage(results, pageIndex, color) {
+  var page = results.slice(
+    (pageIndex - 1) * PAGE_LIMIT,
+    pageIndex * PAGE_LIMIT
+  );
+  page.forEach((result) => printResult(result, color));
+
+  if (results.length > PAGE_LIMIT) $("#more").removeClass("d-none");
 }
 
 function restore() {
@@ -178,53 +288,34 @@ function restore() {
   $("#btn").attr("disabled", false);
 }
 
-function printColorRow(e, color) {
+function printColorRow(e) {
+  const color = COLORS[e.symbol.toLowerCase()];
   var row = $("#colorRow").clone();
   row.attr("id", "").removeClass("d-none");
 
-  printElement(
-    row.find("#ptable"),
-    "",
-    HOME_SIZE_FACTOR,
-    e,
-    COLORS[e.symbol].ptable.stroke,
-    COLORS[e.symbol].ptable.bg
-  );
-  printElement(
-    row.find("#jmol"),
-    "",
-    HOME_SIZE_FACTOR,
-    e,
-    COLORS[e.symbol].jmol.stroke,
-    COLORS[e.symbol].jmol.bg
-  );
-  printElement(
-    row.find("#greyscale"),
-    "",
-    HOME_SIZE_FACTOR,
-    e,
-    COLORS[e.symbol].grey.stroke,
-    COLORS[e.symbol].grey.bg
-  );
+  row
+    .find("#ptable")
+    .append(printElement(SCHEME_SIZE_FACTOR, e, PTABLE_COLOR))
+    .end()
+    .find("#jmol")
+    .append(printElement(SCHEME_SIZE_FACTOR, e, JMOL_COLOR))
+    .end()
+    .find("#greyscale")
+    .append(printElement(SCHEME_SIZE_FACTOR, e, GREYSCALE_COLOR));
+
   $("#tableColors").append(row);
 }
 
 function printColorTable() {
   ELEMENTS.forEach((e) => {
-    console.log(e);
-    printColorRow(e, COLORS[e.symbol]);
+    printColorRow(e);
   });
 }
 
 function printPeriodicTable() {
   ELEMENTS.forEach((e) => {
-    printElement(
-      $("td#" + e.number),
-      "",
-      TABLE_SIZE_FACTOR,
-      e,
-      COLORS[e.symbol].ptable.stroke,
-      COLORS[e.symbol].ptable.bg
+    $("td#" + e.number).append(
+      printElement(TABLE_SIZE_FACTOR, e, PTABLE_COLOR)
     );
   });
 }
