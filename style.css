@@ -8,3 +8,12 @@
     right: 25px;
     display: none;
 }
+
+.logo {
+    height:80px;
+}
+
+body {
+    position:absolute;
+    top: 40px;
+}

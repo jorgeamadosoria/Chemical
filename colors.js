@@ -595,6 +595,7 @@ COLORS["og"] = {
 const PTABLE_COLOR = "ptable";
 const JMOL_COLOR = "jmol";
 const GREYSCALE_COLOR = "grey";
+const BW_COLOR = "bw";
 
 function getColor(ele, color) {
   switch (color) {
@@ -610,9 +611,11 @@ function getColor(ele, color) {
       return COLORS[ele.symbol.toLowerCase()]
         ? COLORS[ele.symbol.toLowerCase()].grey
         : generateGrey(ele);
+    case BW_COLOR:
+      return generateBlackWhite(ele);
   }
 
-  return stringToColor(ele, color);
+  return stringToColor(ele);
 }
 
 //https://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
@@ -639,7 +642,14 @@ function generateGrey(ele, color) {
   };
 }
 
-function stringToColor(ele, color) {
+function generateBlackWhite(ele) {
+  return {
+    stroke: "black",
+    bg: "white",
+  };
+}
+
+function stringToColor(ele) {
   var code = ele.weight;
   var bg = code.toString(16);
   if (code >= 100) bg = code * 1000 + code;
