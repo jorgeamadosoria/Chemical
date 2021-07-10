@@ -716,68 +716,24 @@
       integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
       crossorigin="anonymous"
     ></script>
-    <script src="colors.js"></script>
     <script src="elements.js"></script>
     <script src="script.js"></script>
     <script>
       var results = Array();
       var currentPage = 1;
-      const PAGE_LIMIT = 20;
-      $("form input").keydown(clickOnReturn);
 
-      const algWorker = new Worker("algorithm.js");
+      fetch("http://jorgeamadosoria.info/data-store/chemical/elements.json")
+        .then((response) => response.json())
+        .then(initializeData);
 
-      algWorker.onmessage = function (e) {
-        results = Array();
-        currentPage = 1;
-        e.data.forEach((e) => results.push(e));
-        //  pagination(results.length);
-        printResults(results);
-        restore();
-      };
+      const algWorker = createWorker();
 
-      setMoreHandler();
-
-      $("#btn").on("click", () => {
-        onClick(algWorker, $("#word").val().toLowerCase());
-      });
-
-      $("#btn-show").on("click", () => {
-        word = $("#word-show").val().toLowerCase();
-        if (validateShowResult(word)) {
-          $("#resultShow").empty();
-          printResult(
-            word,
-            $("input[name='colorRadio-show']:checked").val(),
-            true
-          );
-        } else {
-          if (word) alert(`${word} is not a valid string`);
-        }
-      });
+      setHandlers();
 
       printColorTable();
       printPeriodicTable();
 
       executeWithUrlParams(algWorker);
-
-      $(window).scroll(function () {
-        if ($(this).scrollTop() > 200) {
-          $("#back-to-top").fadeIn();
-        } else {
-          $("#back-to-top").fadeOut();
-        }
-      });
-      // scroll body to 0px on click
-      $("#back-to-top").click(function () {
-        $("body,html").animate(
-          {
-            scrollTop: 0,
-          },
-          400
-        );
-        return false;
-      });
     </script>
   </body>
 </html>

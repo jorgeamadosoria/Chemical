@@ -1,6 +1,13 @@
 const HOME_SIZE_FACTOR = 2;
 const SCHEME_SIZE_FACTOR = 0.75;
 const TABLE_SIZE_FACTOR = 1.2;
+const PAGE_LIMIT = 20;
+const COLORS = new Map();
+const PTABLE_COLOR = "ptable";
+const JMOL_COLOR = "jmol";
+const GREYSCALE_COLOR = "grey";
+const BW_COLOR = "bw";
+
 const namedElementConfig = {
   numberY: 10,
   numberX: 2,
@@ -26,6 +33,105 @@ const resultTemplate = $("#result");
 const realResContainer = $("#resultsReal");
 const showContainer = $("#resultShow");
 const modelTemplate = $("#model");
+
+function initializeData(data) {
+  ELEMENTS = data.elements;
+  COLORS = new Map();
+  data.elements.forEach((ele) => {
+    COLORS.set(ele.symbol.toLowerCase(), ele.schema);
+  });
+}
+
+function checkElement(element) {
+  var i = 0;
+  while (
+    i < ELEMENTS.length &&
+    ELEMENTS[i++].symbol.toLowerCase() !== element.element.toLowerCase()
+  );
+
+  return i === ELEMENTS.length
+    ? fakeElement(element.element)
+    : { ...ELEMENTS[i - 1], real: true };
+}
+
+function fakeElement(name) {
+  var weight =
+    500 + name.charCodeAt(0) + (name.length > 1 ? name.charCodeAt(1) : 0);
+  var number =
+    ELEMENTS.length +
+    name.charCodeAt(0) +
+    (name.length > 1 ? name.charCodeAt(1) : 0);
+
+  return { symbol: name, weight, number, real: false };
+}
+
+function capitalize(e) {
+  return e.charAt(0).toUpperCase() + e.slice(1, e.length);
+}
+
+function getColor(ele, color) {
+  switch (color) {
+    case PTABLE_COLOR:
+      return COLORS[ele.symbol.toLowerCase()]
+        ? COLORS[ele.symbol.toLowerCase()].ptable
+        : stringToColor(ele, color);
+    case JMOL_COLOR:
+      return COLORS[ele.symbol.toLowerCase()]
+        ? COLORS[ele.symbol.toLowerCase()].jmol
+        : stringToColor(ele, color);
+    case GREYSCALE_COLOR:
+      return COLORS[ele.symbol.toLowerCase()]
+        ? COLORS[ele.symbol.toLowerCase()].grey
+        : generateGrey(ele);
+    case BW_COLOR:
+      return generateBlackWhite(ele);
+  }
+
+  return stringToColor(ele);
+}
+
+//https://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
+function isLight(c) {
+  var rgb = parseInt(c, 16); // convert rrggbb to decimal
+  var r = (rgb >> 16) & 0xff; // extract red
+  var g = (rgb >> 8) & 0xff; // extract green
+  var b = (rgb >> 0) & 0xff; // extract blue
+
+  var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+  return luma < 60 ? "white" : "black";
+}
+
+function generateGrey(ele, color) {
+  var code = ele.weight;
+  var bg = code.toString(16) + code.toString(16);
+
+  bg = ele.weight % 2 ? bg.slice(0, 2) : bg.slice(0, 2)[1] + bg.slice(0, 2)[0];
+
+  bg = bg + bg + bg;
+  return {
+    stroke: isLight(bg),
+    bg: bg,
+  };
+}
+
+function generateBlackWhite(ele) {
+  return {
+    stroke: "black",
+    bg: "white",
+  };
+}
+
+function stringToColor(ele) {
+  var code = ele.weight;
+  var bg = code.toString(16);
+  if (code >= 100) bg = code * 1000 + code;
+  else if (code >= 10) bg = code * 10000 + code * 100 + code;
+
+  return {
+    stroke: isLight(bg),
+    bg: bg,
+  };
+}
 
 function printElement(sizeFactor, element, color, classes = "") {
   const colorCfg = getColor(element, color);
@@ -173,23 +279,25 @@ function appendToContainer(isReal, jqueryElement, isShow) {
   container.append(jqueryElement);
 }
 
-function clickOnReturn(e) {
-  if (e.keyCode == 13) {
-    $("#btn").click();
-    e.preventDefault();
-    return false;
-  }
+function setInputKeyDownEventHandler() {
+  $("form input").keydown((e) => {
+    if (e.keyCode == 13) {
+      $("#btn").click();
+      e.preventDefault();
+      return false;
+    }
 
-  if (
-    e.keyCode !== 8 &&
-    e.keyCode !== 16 &&
-    e.keyCode !== 93 &&
-    e.keyCode !== 20 &&
-    validateKey(e)
-  ) {
-    e.preventDefault();
-    return false;
-  }
+    if (
+      e.keyCode !== 8 &&
+      e.keyCode !== 16 &&
+      e.keyCode !== 93 &&
+      e.keyCode !== 20 &&
+      validateKey(e)
+    ) {
+      e.preventDefault();
+      return false;
+    }
+  });
 }
 
 function clickOnReturnShow(e) {
@@ -238,6 +346,47 @@ function loading() {
   $("#btn").attr("disabled", true);
 }
 
+function setWindowScrollEventHandler() {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 200) {
+      $("#back-to-top").fadeIn();
+    } else {
+      $("#back-to-top").fadeOut();
+    }
+  });
+}
+
+function setBackToTopHandler() {
+  // scroll body to 0px on click
+  $("#back-to-top").click(function () {
+    $("body,html").animate(
+      {
+        scrollTop: 0,
+      },
+      400
+    );
+    return false;
+  });
+}
+
+function setShowGenerateHandler() {
+  $("#btn-show").on("click", () => {
+    word = $("#word-show").val().toLowerCase();
+    if (validateShowResult(word)) {
+      $("#resultShow").empty();
+      printResult(word, $("input[name='colorRadio-show']:checked").val(), true);
+    } else {
+      if (word) alert(`${word} is not a valid string`);
+    }
+  });
+}
+
+function setGenerateHandler() {
+  $("#btn").on("click", () => {
+    onClick(algWorker, $("#word").val().toLowerCase());
+  });
+}
+
 function setMoreHandler() {
   $("#more").on("click", () => {
     printPage(
@@ -249,6 +398,29 @@ function setMoreHandler() {
     if ((currentPage - 1) * PAGE_LIMIT >= results.length)
       $("#more").addClass("d-none");
   });
+}
+
+function setHandlers() {
+  setMoreHandler();
+  setInputKeyDownEventHandler();
+  setGenerateHandler();
+  setShowGenerateHandler();
+  setBackToTopHandler();
+  setWindowScrollEventHandler();
+}
+
+function createWorker() {
+  var worker = new Worker("algorithm.js");
+
+  worker.onmessage = function (e) {
+    results = Array();
+    currentPage = 1;
+    e.data.forEach((e) => results.push(e));
+    //  pagination(results.length);
+    printResults(results);
+    restore();
+  };
+  return worker;
 }
 
 function printResults(results) {
