@@ -2,11 +2,12 @@ const HOME_SIZE_FACTOR = 2;
 const SCHEME_SIZE_FACTOR = 0.75;
 const TABLE_SIZE_FACTOR = 1.2;
 const PAGE_LIMIT = 20;
-const COLORS = new Map();
 const PTABLE_COLOR = "ptable";
 const JMOL_COLOR = "jmol";
 const GREYSCALE_COLOR = "grey";
 const BW_COLOR = "bw";
+var ELEMENTS = Array();
+var COLORS = new Map();
 
 const namedElementConfig = {
   numberY: 10,
@@ -40,6 +41,8 @@ function initializeData(data) {
   data.elements.forEach((ele) => {
     COLORS.set(ele.symbol.toLowerCase(), ele.schema);
   });
+  console.log(ELEMENTS);
+  console.log(COLORS);
 }
 
 function checkElement(element) {
