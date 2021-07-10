@@ -41,8 +41,6 @@ function initializeData(data) {
   data.elements.forEach((ele) => {
     COLORS.set(ele.symbol.toLowerCase(), ele.schema);
   });
-  console.log(ELEMENTS);
-  console.log(COLORS);
 }
 
 function checkElement(element) {
@@ -75,16 +73,16 @@ function capitalize(e) {
 function getColor(ele, color) {
   switch (color) {
     case PTABLE_COLOR:
-      return COLORS[ele.symbol.toLowerCase()]
-        ? COLORS[ele.symbol.toLowerCase()].ptable
+      return COLORS.get(ele.symbol.toLowerCase())
+        ? COLORS.get(ele.symbol.toLowerCase()).ptable
         : stringToColor(ele, color);
     case JMOL_COLOR:
-      return COLORS[ele.symbol.toLowerCase()]
-        ? COLORS[ele.symbol.toLowerCase()].jmol
+      return COLORS.get(ele.symbol.toLowerCase())
+        ? COLORS.get(ele.symbol.toLowerCase()).jmol
         : stringToColor(ele, color);
     case GREYSCALE_COLOR:
-      return COLORS[ele.symbol.toLowerCase()]
-        ? COLORS[ele.symbol.toLowerCase()].grey
+      return COLORS.get(ele.symbol.toLowerCase())
+        ? COLORS.get(ele.symbol.toLowerCase()).grey
         : generateGrey(ele);
     case BW_COLOR:
       return generateBlackWhite(ele);
@@ -139,6 +137,7 @@ function stringToColor(ele) {
 function printElement(sizeFactor, element, color, classes = "") {
   const colorCfg = getColor(element, color);
   var model = modelTemplate.clone();
+  console.log(element);
   var strokeColor = colorCfg.stroke ? colorCfg.stroke : "black";
   var fillColor = colorCfg.bg ? colorCfg.bg : "white";
   var config = element.name ? namedElementConfig : unnamedElementConfig;
@@ -247,7 +246,7 @@ function prepareShowResult(result) {
     elements: result.split(",").map((ele) => {
       return {
         element: ele.trim(),
-        real: COLORS[ele.toLowerCase()] ? true : false,
+        real: COLORS.get(ele.toLowerCase()) ? true : false,
       };
     }),
     real: false,
@@ -464,7 +463,7 @@ function restore() {
 }
 
 function printColorRow(e) {
-  const color = COLORS[e.symbol.toLowerCase()];
+  const color = COLORS.get(e.symbol.toLowerCase());
   var row = $("#colorRow").clone();
   row.attr("id", "").removeClass("d-none");
 
