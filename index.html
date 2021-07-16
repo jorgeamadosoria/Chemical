@@ -2,9 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <
     <title>Chemical Words</title>
-    >
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -120,9 +118,9 @@
         <br /><br />
         <hr />
         <div class="row">
-          <div class="col-lg-5 col-md-7 col-sm-8">
+          <div class="col-lg-4 col-md-7 col-sm-8">
             <form class="form">
-              <div class="ml-2 mb-2 form-group">
+              <div class="ml-2 mb-2 input-group form-group">
                 <input
                   id="word"
                   maxlength="30"
@@ -130,9 +128,20 @@
                   class="form-control"
                   placeholder="word to generate symbols"
                 />
+                <div class="input-group-append">
+                  <button id="btn" type="button" class="btn btn-primary">
+                    <span
+                      id="btn-loader"
+                      class="d-none spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="btn-text">Generate</span>
+                  </button>
+                </div>
               </div>
-              <div class="d-inline-flex">
-                <div class="ml-2 mb-2 form-group border pl-2 pt-2 pb-1">
+              <div class="d-flex ml-3 justify-content-center form-group">
+                <div class="border pt-1 pb-1 pl-2">
                   <div class="form-check form-check-inline">
                     <input
                       class="form-check-input"
@@ -142,9 +151,7 @@
                       value="ptable"
                       checked
                     />
-                    <label class="form-check-label" for="ptableColor"
-                      >Ptable</label
-                    >
+                    <label class="form-check-label" for="ptable">Ptable</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input
@@ -154,7 +161,7 @@
                       id="jmol"
                       value="jmol"
                     />
-                    <label class="form-check-label" for="JMolColor">JMol</label>
+                    <label class="form-check-label" for="jmol">JMol</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input
@@ -164,7 +171,7 @@
                       id="greyscale"
                       value="grey"
                     />
-                    <label class="form-check-label" for="greyScaleColor"
+                    <label class="form-check-label" for="greyscale"
                       >Greyscale</label
                     >
                   </div>
@@ -176,22 +183,12 @@
                       id="bw"
                       value="bw"
                     />
-                    <label class="form-check-label" for="bwColor"
+                    <label class="form-check-label" for="bw"
                       >Black & White</label
                     >
                   </div>
                 </div>
-                <button id="btn" type="button" class="btn btn-primary">
-                  <span
-                    id="btn-loader"
-                    class="d-none spinner-border spinner-border-sm"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                  <span class="btn-text">Generate</span>
-                </button>
               </div>
-              <div class="ml-2 mb-2 form-group"></div>
             </form>
           </div>
           <div class="col-lg-2 col-sm-4 d-none d-sm-block">
@@ -232,71 +229,71 @@
         <br /><br />
         <hr />
         <div class="row">
-          <div class="col-lg-5 col-md-7 col-sm-8">
-            <form class="form-inline">
-              <div class="ml-2 mb-2 form-group">
+          <div class="col-lg-4 col-md-7 col-sm-8">
+            <form class="form">
+              <div class="ml-2 mb-2 input-group form-group">
                 <input
                   id="word-show"
                   type="text"
                   class="form-control"
                   placeholder="fa,ce,s"
                 />
-              </div>
-              <div
-                class="ml-2 mb-2 form-group border d-inline-flex pl-2 pt-2 pb-1"
-              >
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="colorRadio-show"
-                    id="ptable-show"
-                    value="ptable"
-                    checked
-                  />
-                  <label class="form-check-label" for="ptableColor"
-                    >Ptable</label
-                  >
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="colorRadio-show"
-                    id="jmol-show"
-                    value="jmol"
-                  />
-                  <label class="form-check-label" for="JMolColor">JMol</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="colorRadio-show"
-                    id="greyscale-show"
-                    value="grey"
-                  />
-                  <label class="form-check-label" for="greyScaleColor"
-                    >Greyscale</label
-                  >
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="colorRadio-show"
-                    id="bw"
-                    value="bw"
-                  />
-                  <label class="form-check-label" for="bwColor"
-                    >Black & White</label
-                  >
+                <div class="input-group-append">
+                  <button id="btn-show" type="button" class="btn btn-primary">
+                    Show
+                  </button>
                 </div>
               </div>
-              <div class="ml-2 mb-2 form-group">
-                <button id="btn-show" type="button" class="btn btn-primary">
-                  Show
-                </button>
+              <div class="d-flex ml-3 justify-content-center form-group">
+                <div class="border pt-1 pb-1 pl-2">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="colorRadio-show"
+                      id="ptable-show"
+                      value="ptable"
+                      checked
+                    />
+                    <label class="form-check-label" for="ptable-show"
+                      >Ptable</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="colorRadio-show"
+                      id="jmol-show"
+                      value="jmol"
+                    />
+                    <label class="form-check-label" for="jmol-show">JMol</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="colorRadio-show"
+                      id="greyscale-show"
+                      value="grey"
+                    />
+                    <label class="form-check-label" for="greyscale-show"
+                      >Greyscale</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="colorRadio-show"
+                      id="bw-show"
+                      value="bw"
+                    />
+                    <label class="form-check-label" for="bw-show"
+                      >Black & White</label
+                    >
+                  </div>
+                </div>
               </div>
             </form>
           </div>
